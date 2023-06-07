@@ -1,24 +1,20 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { renderTable } from './src/util/renderTable.js';
+import { attachSubmitEventHandlerTo } from './src/util/attachEventTo.js';
+import { getUserIdFrom, getUserRankTierBy } from './src/api/index.js';
+import './style.css';
 
 document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+  <h1>팀 짜기</h1>
+  <section id="team-container">
+    ${renderTable()}
+  </section>
+`;
 
-setupCounter(document.querySelector('#counter'))
+const submitEventHandler = async (event) => {
+  event.preventDefault();
+  // await getUserIdFrom(event.target[0].value); // TODO: [0] <= 이거 없애버리기
+  // TODO: 라이엇 서버 요청은 be에서 해야 함.(api key 노출 때문에)
+};
+
+// 이벤트 상속하는 식으로 변경하자.
+attachSubmitEventHandlerTo(document.querySelectorAll('form'), submitEventHandler);
