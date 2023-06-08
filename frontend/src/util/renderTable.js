@@ -14,7 +14,7 @@ export const renderTable = () => {
 const renderTableBodyContent = () => {
   let res = '';
 
-  const LANES = ['Top', 'Jun', 'Mid', 'Adc', 'Sup'];
+  const LANES = ['Top', 'Jug', 'Mid', 'Adc', 'Sup'];
 
   const renderLaneFormOf = (lane) => {
     return `
