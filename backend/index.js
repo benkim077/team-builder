@@ -16,14 +16,15 @@ app.get('/api/rank/:summonerName', async (req, res) => {
   const id = await getUserIdBy(summonerName);
   const ranksSortedByQueue = await getUserRankTierBy(id);
 
-  const ranksObj = ranksSortedByQueue.map((queue) => {
-    const queueType = queue.queueType === 'RANKED_SOLO_5x5' ? '솔랭' : '자유랭';
+  const ranks = ranksSortedByQueue.reduce((acc, cur) => {
+    const queueType = cur.queueType === 'RANKED_SOLO_5x5' ? '솔랭' : '자유랭';
     return {
-      [queueType]: `${queue.tier} ${queue.rank}`,
+      ...acc,
+      [queueType]: `${cur.tier} ${cur.rank}`,
     };
-  });
+  }, {});
 
-  res.json({ ...ranksObj });
+  res.json({ ...ranks });
 });
 
 //
