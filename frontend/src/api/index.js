@@ -8,6 +8,6 @@ const instance = axios.create({
 });
 
 export async function getUserRankTierBy(summonerName) {
-  const { data } = await instance.get(`/api/rank/${summonerName}`);
+  const { data } = await instance.get(`/rank/${summonerName}`);
   return data;
 }

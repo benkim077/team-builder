@@ -12,7 +12,12 @@ document.querySelector('#app').innerHTML = `
 
 const submitEventHandler = async (event) => {
   event.preventDefault();
-  //
+
+  // TODO: 리팩토링
+  const inputUsername = event.target.children[0].value;
+
+  const res = await getUserRankTierBy(inputUsername);
+  console.log(res);
 };
 
 // 이벤트 상속하는 식으로 변경하자.
