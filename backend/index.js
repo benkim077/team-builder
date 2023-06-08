@@ -9,28 +9,24 @@ const port = 3000;
 // cors
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
+// API
 app.get('/api/rank/:summonerName', async (req, res) => {
-  console.log('get rank by summonerName => req.params', req.params);
   const { summonerName } = req.params;
 
-  // const { data } = await getUserIdBy(summonerName);
-  // console.log(data);
+  const id = await getUserIdBy(summonerName);
+  const ranksSortedByQueue = await getUserRankTierBy(id);
+
+  const ranksObj = ranksSortedByQueue.map((queue) => {
+    const queueType = queue.queueType === 'RANKED_SOLO_5x5' ? '솔랭' : '자유랭';
+    return {
+      [queueType]: `${queue.tier} ${queue.rank}`,
+    };
+  });
+
+  res.json({ ...ranksObj });
 });
 
-// app.get('/user/:id', (req, res) => {
-//   // http://localhost:3000/user/benkim077
-//   // const q = req.params;
-
-//   // http://localhost:3000/user/benkim077/?q=benkim&location=seoul&age=30
-//   const q = req.query;
-
-//   res.json({ ...q });
-// });
-
+//
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`listening at http://localhost:${port}`);
 });
