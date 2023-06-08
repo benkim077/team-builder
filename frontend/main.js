@@ -1,6 +1,6 @@
 import { renderTable } from './src/util/renderTable.js';
 import { attachSubmitEventHandlerTo } from './src/util/attachEventTo.js';
-import { getUserIdFrom, getUserRankTierBy } from './src/api/index.js';
+import { getUserRankTierBy } from './src/api/index.js';
 import './style.css';
 
 document.querySelector('#app').innerHTML = `
@@ -12,8 +12,7 @@ document.querySelector('#app').innerHTML = `
 
 const submitEventHandler = async (event) => {
   event.preventDefault();
-  // await getUserIdFrom(event.target[0].value); // TODO: [0] <= 이거 없애버리기
-  // TODO: 라이엇 서버 요청은 be에서 해야 함.(api key 노출 때문에)
+  //
 };
 
 // 이벤트 상속하는 식으로 변경하자.
